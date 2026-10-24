@@ -27,6 +27,9 @@ def draw_text(d,xy,text,font,fill,max_width,spacing=17):
     return y
 
 for index,(tag,heading,body) in enumerate(SLIDES,1):
+    # Decode escaped line breaks in JSON-authored slide text before layout.
+    heading=heading.replace(chr(92)+'n',chr(10))
+    body=body.replace(chr(92)+'n',chr(10))
     img=Image.new("RGB",(1080,1350),BG); d=ImageDraw.Draw(img)
     small=ImageFont.truetype(SANS,19)
     tagfont=ImageFont.truetype(BOLD,20)
